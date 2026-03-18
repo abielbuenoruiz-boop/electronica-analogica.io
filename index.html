@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrónica Analógica - Portafolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800" x-data="courseApp()">
+
+    <section class="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-16 sm:py-24 shadow-inner">
+        <div class="max-w-4xl mx-auto px-4 text-center fade-in">
+            <div class="inline-block bg-blue-500/20 text-blue-300 p-3 rounded-2xl mb-6 backdrop-blur-sm">
+                <i class="fa-solid fa-microchip text-3xl"></i>
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                Electrónica Analógica
+            </h1>
+            <p class="text-sm sm:text-base text-slate-400 mt-2">
+                Alumno: Abiel Bueno Ruiz
+            </p>
+            <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto px-2 font-light mt-2">
+                Página de trabajos y reportes realizados durante el curso
+            </p>
+        </div>
+    </section>
+
+    <main class="relative -mt-8">
+        <section class="max-w-4xl mx-auto px-4 fade-in" style="animation-delay: 0.2s;">
+            
+            <div class="bg-white rounded-3xl shadow-xl p-6 sm:p-10 border border-slate-100">
+                
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-8 border-b border-slate-100 pb-6">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-800">
+                            Índice de Trabajos
+                        </h2>
+                    </div>
+                    <span class="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-bold self-start sm:self-auto" 
+                          x-text="assignments.filter(a => a.title).length + ' documentos'"></span>
+                </div>
+
+                <div class="space-y-5">
+                    <template x-for="(task, index) in assignments" :key="index">
+                        
+                        <div x-show="task.title" class="group relative bg-slate-50 border border-slate-200 border-l-4 border-l-blue-500 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between hover:shadow-md transition-all duration-300 gap-4 sm:gap-6">
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-white p-3 rounded-lg text-blue-500 shadow-sm shrink-0 mt-1 sm:mt-0 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-file-pdf text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-snug" x-text="task.title"></h3>
+                                    <p class="text-xs sm:text-sm text-slate-500 mt-1.5 font-medium"><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> Disponible </p>
+                                </div>
+                            </div>
+
+                            <div class="flex w-full sm:w-auto space-x-3 shrink-0">
+                                <a :href="task.link ? task.link.replace('dl=0', 'dl=1') : '#'" target="_blank" 
+                                   class="flex-1 sm:flex-none flex justify-center items-center px-4 py-2.5 bg-blue-50 text-blue-700 rounded-lg text-sm font-bold hover:bg-blue-100 transition-colors">
+                                    <i class="fa-solid fa-download mr-2"></i> Descargar
+                                </a>
+                                <a :href="task.link || '#'" target="_blank"
+                                   class="flex-1 sm:flex-none flex justify-center items-center px-6 py-2.5 bg-slate-800 text-white rounded-lg text-sm font-bold hover:bg-slate-900 transition-colors shadow-sm">
+                                    Abrir <i class="fa-solid fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12 mt-8 text-center text-slate-400 text-sm font-medium">
+        <p>Electrónica Analógica</p>
+        <p class="mt-2">Alumno: Abiel Bueno Ruiz</p>
+    </footer>
+
+    <script>
+        function courseApp() {
+            return{ 
+                assignments:[
+                    { 
+                        title: 'Práctica de medición de resistencia en serie con Diodo con fuente variable', 
+                        link: 'https://www.dropbox.com/scl/fi/yenh4zqt74lodlcptye4x/PRACTICA-1.pdf?rlkey=x6377h5wfeg7qxsdxe7u32ren&st=9osc822h&dl=0' 
+                    },
+                    { 
+                        title: 'Práctica de rectificador de media onda y onda completa', 
+                        link: 'https://www.dropbox.com/scl/fi/tmlxp9ouxd9xbk86zspby/Practica2.pdf?rlkey=hiou5s3iunr12pmukk0j9g9w7&st=myk0uk9q&dl=0' 
+                    },
+                    { 
+                        title: 'Reporte de examen: Fuente de voltaje', 
+                        link: 'https://www.dropbox.com/scl/fi/6kimsdgmt0chsu9s3259i/Pr-ctica_Fuente_simetrica.pdf?rlkey=k1pq80cl245z61qj4rn0wak2s&st=fdveewsk&dl=0' 
+                    },
+                    { 
+                        title: 'Investigación Zona de operación y curva característica del Transistor', 
+                        link: 'https://www.dropbox.com/scl/fi/6gf3d8g1lrkep0z6k2wc6/Zona-de-operaci-n-y-curva-caracter-stica-del-transistor-BJT.pdf?rlkey=s45pbv03mhnx19quqf5xusble&st=ywaaxxk6&dl=0' 
+                    },
+                    { 
+                        title: 'Transistor como interruptor', 
+                        link: 'https://www.dropbox.com/scl/fi/1kmqv3hys9elkvgej18j6/PRACTICA-3.pdf?rlkey=z0vj4qc17y4498v6n7sr8t8mw&st=azv7hvja&dl=0' 
+                    }
+                ]
+            }   
+        }
+    </script>
+</body>
+</html>
+
+</html>
