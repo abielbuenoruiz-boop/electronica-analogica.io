@@ -51,59 +51,55 @@
         </div>
     </section>
 
-    <main class="relative -mt-8">
-        <section class="max-w-4xl mx-auto px-4 fade-in" style="animation-delay: 0.2s;">
+    <template x-for="(unit, i) in assignments" :key="i">
+    <div class="mb-8">
 
-            <div class="bg-white rounded-3xl shadow-xl p-6 sm:p-10 border border-slate-100">
+        <h2 class="text-lg sm:text-xl font-bold text-blue-600 mb-4 border-b pb-2"
+            x-text="unit.unit"></h2>
 
-                <div
-                    class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-8 border-b border-slate-100 pb-6">
-                    <div>
-                        <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-800">
-                            Índice de Trabajos
-                        </h2>
+        <template x-for="(task, index) in unit.tasks" :key="index">
+
+            <div class="group relative bg-slate-50 border border-slate-200 border-l-4 border-l-blue-500 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between hover:shadow-md transition-all duration-300 gap-4 sm:gap-6 mb-4">
+
+                <div class="flex items-start space-x-4">
+                    <div class="bg-white p-3 rounded-lg text-blue-500 shadow-sm shrink-0">
+                        <i class="fa-solid fa-file-pdf text-xl"></i>
                     </div>
-                    <span
-                        class="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-bold self-start sm:self-auto"
-                        x-text="assignments.filter(a => a.title).length + ' documentos'"></span>
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-sm sm:text-base"
+                            x-text="task.title"></h3>
+
+                        <p class="text-xs sm:text-sm text-slate-500 mt-1.5 font-medium">
+                            <i class="fa-solid fa-circle-check text-green-500 mr-1"></i>
+                            Disponible
+                        </p>
+                    </div>
                 </div>
 
-                <div class="space-y-5">
-                    <template x-for="(task, index) in assignments" :key="index">
+                <div class="flex w-full sm:w-auto space-x-3 shrink-0">
 
-                        <div x-show="task.title"
-                            class="group relative bg-slate-50 border border-slate-200 border-l-4 border-l-blue-500 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between hover:shadow-md transition-all duration-300 gap-4 sm:gap-6">
+                    <a :href="task.link ? task.link.replace('dl=0', 'dl=1') : '#'"
+                       target="_blank"
+                       class="flex-1 sm:flex-none flex justify-center items-center px-4 py-2.5 bg-blue-50 text-blue-700 rounded-lg text-sm font-bold hover:bg-blue-100 transition-colors">
 
-                            <div class="flex items-start space-x-4">
-                                <div
-                                    class="bg-white p-3 rounded-lg text-blue-500 shadow-sm shrink-0 mt-1 sm:mt-0 group-hover:scale-110 transition-transform">
-                                    <i class="fa-solid fa-file-pdf text-xl"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-snug"
-                                        x-text="task.title"></h3>
-                                    <p class="text-xs sm:text-sm text-slate-500 mt-1.5 font-medium"><i
-                                            class="fa-solid fa-circle-check text-green-500 mr-1"></i> Disponible </p>
-                                </div>
-                            </div>
+                        <i class="fa-solid fa-download mr-2"></i>
+                        Descargar
+                    </a>
 
-                            <div class="flex w-full sm:w-auto space-x-3 shrink-0">
-                                <a :href="task.link ? task.link.replace('dl=0', 'dl=1') : '#'" target="_blank"
-                                    class="flex-1 sm:flex-none flex justify-center items-center px-4 py-2.5 bg-blue-50 text-blue-700 rounded-lg text-sm font-bold hover:bg-blue-100 transition-colors">
-                                    <i class="fa-solid fa-download mr-2"></i> Descargar
-                                </a>
-                                <a :href="task.link || '#'" target="_blank"
-                                    class="flex-1 sm:flex-none flex justify-center items-center px-6 py-2.5 bg-slate-800 text-white rounded-lg text-sm font-bold hover:bg-slate-900 transition-colors shadow-sm">
-                                    Abrir <i class="fa-solid fa-arrow-right ml-2"></i>
-                                </a>
-                            </div>
+                    <a :href="task.link || '#'"
+                       target="_blank"
+                       class="flex-1 sm:flex-none flex justify-center items-center px-6 py-2.5 bg-slate-800 text-white rounded-lg text-sm font-bold hover:bg-slate-900 transition-colors shadow-sm">
 
-                        </div>
-                    </template>
+                        Abrir
+                        <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+
                 </div>
             </div>
-        </section>
-    </main>
+        </template>
+    </div>
+</template>
 
     <footer class="py-12 mt-8 text-center text-slate-400 text-sm font-medium">
         <p>Electrónica Analógica</p>
