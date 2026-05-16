@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +9,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
-        [x-cloak] { display: none !important; }
-        .fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
+
 <body class="bg-slate-50 font-sans text-slate-800" x-data="courseApp()">
 
     <section class="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-16 sm:py-24 shadow-inner">
@@ -37,41 +53,47 @@
 
     <main class="relative -mt-8">
         <section class="max-w-4xl mx-auto px-4 fade-in" style="animation-delay: 0.2s;">
-            
+
             <div class="bg-white rounded-3xl shadow-xl p-6 sm:p-10 border border-slate-100">
-                
-                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-8 border-b border-slate-100 pb-6">
+
+                <div
+                    class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-8 border-b border-slate-100 pb-6">
                     <div>
                         <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-800">
                             Índice de Trabajos
                         </h2>
                     </div>
-                    <span class="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-bold self-start sm:self-auto" 
-                          x-text="assignments.filter(a => a.title).length + ' documentos'"></span>
+                    <span
+                        class="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-bold self-start sm:self-auto"
+                        x-text="assignments.filter(a => a.title).length + ' documentos'"></span>
                 </div>
 
                 <div class="space-y-5">
                     <template x-for="(task, index) in assignments" :key="index">
-                        
-                        <div x-show="task.title" class="group relative bg-slate-50 border border-slate-200 border-l-4 border-l-blue-500 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between hover:shadow-md transition-all duration-300 gap-4 sm:gap-6">
-                            
+
+                        <div x-show="task.title"
+                            class="group relative bg-slate-50 border border-slate-200 border-l-4 border-l-blue-500 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between hover:shadow-md transition-all duration-300 gap-4 sm:gap-6">
+
                             <div class="flex items-start space-x-4">
-                                <div class="bg-white p-3 rounded-lg text-blue-500 shadow-sm shrink-0 mt-1 sm:mt-0 group-hover:scale-110 transition-transform">
+                                <div
+                                    class="bg-white p-3 rounded-lg text-blue-500 shadow-sm shrink-0 mt-1 sm:mt-0 group-hover:scale-110 transition-transform">
                                     <i class="fa-solid fa-file-pdf text-xl"></i>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-snug" x-text="task.title"></h3>
-                                    <p class="text-xs sm:text-sm text-slate-500 mt-1.5 font-medium"><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> Disponible </p>
+                                    <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-snug"
+                                        x-text="task.title"></h3>
+                                    <p class="text-xs sm:text-sm text-slate-500 mt-1.5 font-medium"><i
+                                            class="fa-solid fa-circle-check text-green-500 mr-1"></i> Disponible </p>
                                 </div>
                             </div>
 
                             <div class="flex w-full sm:w-auto space-x-3 shrink-0">
-                                <a :href="task.link ? task.link.replace('dl=0', 'dl=1') : '#'" target="_blank" 
-                                   class="flex-1 sm:flex-none flex justify-center items-center px-4 py-2.5 bg-blue-50 text-blue-700 rounded-lg text-sm font-bold hover:bg-blue-100 transition-colors">
+                                <a :href="task.link ? task.link.replace('dl=0', 'dl=1') : '#'" target="_blank"
+                                    class="flex-1 sm:flex-none flex justify-center items-center px-4 py-2.5 bg-blue-50 text-blue-700 rounded-lg text-sm font-bold hover:bg-blue-100 transition-colors">
                                     <i class="fa-solid fa-download mr-2"></i> Descargar
                                 </a>
                                 <a :href="task.link || '#'" target="_blank"
-                                   class="flex-1 sm:flex-none flex justify-center items-center px-6 py-2.5 bg-slate-800 text-white rounded-lg text-sm font-bold hover:bg-slate-900 transition-colors shadow-sm">
+                                    class="flex-1 sm:flex-none flex justify-center items-center px-6 py-2.5 bg-slate-800 text-white rounded-lg text-sm font-bold hover:bg-slate-900 transition-colors shadow-sm">
                                     Abrir <i class="fa-solid fa-arrow-right ml-2"></i>
                                 </a>
                             </div>
@@ -90,33 +112,73 @@
 
     <script>
         function courseApp() {
-            return{ 
-                assignments:[
-                    { 
-                        title: 'Práctica de medición de resistencia en serie con Diodo con fuente variable', 
-                        link: 'https://www.dropbox.com/scl/fi/yenh4zqt74lodlcptye4x/PRACTICA-1.pdf?rlkey=x6377h5wfeg7qxsdxe7u32ren&st=9osc822h&dl=0' 
+            return {
+                assignments: [
+                    {
+                        unit: "Unidad 1",
+                        tasks: [
+                            {
+                                title: 'Práctica de medición de resistencia en serie con Diodo',
+                                link: 'https://www.dropbox.com/scl/fi/yenh4zqt74lodlcptye4x/PRACTICA-1.pdf?dl=0'
+                            },
+                            {
+                                title: 'Práctica de rectificador de media onda y onda completa',
+                                link: 'https://www.dropbox.com/scl/fi/tmlxp9ouxd9xbk86zspby/Practica2.pdf?dl=0'
+                            }
+                        ]
                     },
-                    { 
-                        title: 'Práctica de rectificador de media onda y onda completa', 
-                        link: 'https://www.dropbox.com/scl/fi/tmlxp9ouxd9xbk86zspby/Practica2.pdf?rlkey=hiou5s3iunr12pmukk0j9g9w7&st=myk0uk9q&dl=0' 
+                    {
+                        unit: "Unidad 2",
+                        tasks: [
+                            {
+                                title: 'Reporte de examen: Fuente de voltaje',
+                                link: 'https://www.dropbox.com/scl/fi/6kimsdgmt0chsu9s3259i/Pr-ctica_Fuente_simetrica.pdf?dl=0'
+                            },
+                            {
+                                title: 'Zona de operación y curva del transistor BJT',
+                                link: 'https://www.dropbox.com/scl/fi/6gf3d8g1lrkep0z6k2wc6/Zona-de-operaci-n-y-curva-caracter-stica-del-transistor-BJT.pdf?dl=0'
+                            },
+                            {
+                                title: 'Transistor como interruptor',
+                                link: 'https://www.dropbox.com/scl/fi/1kmqv3hys9elkvgej18j6/PRACTICA-3.pdf?dl=0'
+                            }
+                        ]
                     },
-                    { 
-                        title: 'Reporte de examen: Fuente de voltaje', 
-                        link: 'https://www.dropbox.com/scl/fi/6kimsdgmt0chsu9s3259i/Pr-ctica_Fuente_simetrica.pdf?rlkey=k1pq80cl245z61qj4rn0wak2s&st=fdveewsk&dl=0' 
+
+                    {
+                        unit: "Unidad 3",
+                        tasks: [
+                            { title: 'Sensor crepuscular y sensor de temperatura', 
+                            link: 'https://www.dropbox.com/scl/fi/g72xmjq96c603jir37cjk/Practica-1-Y-2.pdf?rlkey=5wmx8pd0vlzlvrfw8dq8cwnof&st=60gkz6wu&dl=0' },
+                            
+                            { title: 'Par Infrarrojo y Sensor de colores', 
+                             link: 'https://www.dropbox.com/scl/fi/xqqtcwyruv1wkgxh0eag5/practica-3-y-4.pdf?rlkey=udmvr2ju2a7f0w931z06svgdm&st=6s97xhnv&dl=0' },
+                            
+                             { title: 'Sensor de agua y de colores', 
+                             link: 'https://www.dropbox.com/scl/fi/gzfyqqw94ugsy4xt4kti3/practica-5-y-6.pdf?rlkey=pecp35fq4dj4tkj5t871qmgvu&st=5vi5eoh1&dl=0' },
+                            
+                             { title: 'PWM',
+                             link: 'https://www.dropbox.com/scl/fi/2g1e20wkeaoztbon2442f/Pr-ctica-7.pdf?rlkey=81ll1rjak0ct0rtf1pmpqc84q&st=cwems1q8&dl=0' },
+                            
+                             { title: 'Sensor magnético',
+                             link: 'https://www.dropbox.com/scl/fi/p5evyka2jl798h94jyfcc/Practica-8.pdf?rlkey=f954bdb3g9r1s6p0tg0pwhwq2&st=de3apzft&dl=0' },
+                            
+                        ]
                     },
-                    { 
-                        title: 'Investigación Zona de operación y curva característica del Transistor', 
-                        link: 'https://www.dropbox.com/scl/fi/6gf3d8g1lrkep0z6k2wc6/Zona-de-operaci-n-y-curva-caracter-stica-del-transistor-BJT.pdf?rlkey=s45pbv03mhnx19quqf5xusble&st=ywaaxxk6&dl=0' 
-                    },
-                    { 
-                        title: 'Transistor como interruptor', 
-                        link: 'https://www.dropbox.com/scl/fi/1kmqv3hys9elkvgej18j6/PRACTICA-3.pdf?rlkey=z0vj4qc17y4498v6n7sr8t8mw&st=azv7hvja&dl=0' 
+
+                    {
+                        unit: "Unidad 4",
+                        tasks: [
+                            { title: 'Exposición Energías alternas',
+                             link: 'https://www.dropbox.com/scl/fi/mmcwzn49p83ddb2lkz6o8/Fuentes-alternas-de-energ-a-urbanas.pptx?rlkey=wgpcil77ig66k359w2gvltrqk&st=9ktlz371&dl=0' },
+                            { title: 'Resumen de exposición',
+                             link: 'https://www.dropbox.com/scl/fi/zewxsy8rh6pqlkwl8mgyz/Energias-alternas.docx?rlkey=mmtkex6bbicv6k5nbczk3tm6n&st=1rvqxc6o&dl=0' }
+                        ]
                     }
                 ]
-            }   
+            }
         }
     </script>
 </body>
-</html>
 
 </html>
